@@ -55,9 +55,9 @@ async def websocket_endpoint(websocket: WebSocket):
                 # In real life, this comes from AWS Bedrock
                 last_point = data_json["points"][-2:] # Get last x, y
                 jarvis_stroke = {
-                    "points": [last_point[0], last_point[1], last_point[0] + 50, last_point[1] + 50],
-                    "color": "#0000FF", # Blue for Jarvis
-                    "strokeWidth": 5,
+                    "points": [last_point[0], last_point[1], last_point[0] + 100, last_point[1] + 100],
+                    "color": "#981880", # Blue for Jarvis
+                    "strokeWidth": 10,
                     "agent": "jarvis",
                     "type": "new_stroke"
                 }
