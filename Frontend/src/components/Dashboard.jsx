@@ -95,7 +95,10 @@ const Dashboard = () => {
     const [activeTool, setActiveTool] = useState('pencil');
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState("");
+    const [userEmail, setUserEmail] = useState('');
 
+    const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const dropdownRef = useRef(null); // Useful for closing when clicking outside
     const toast = useToast();
 
     const recognitionRef = useRef(null);
@@ -105,8 +108,36 @@ const Dashboard = () => {
         if (!token) {
             toast.error('Please sign in to access the dashboard');
             setTimeout(() => { window.location.href = '/login'; }, 800);
+        } else {
+            // Try to decode JWT payload for an email, else fallback to localStorage 'email'
+            try {
+                const parts = token.split('.');
+                if (parts.length === 3) {
+                    const payload = parts[1];
+                    const b64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+                    const jsonPayload = decodeURIComponent(atob(b64).split('').map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
+                    const data = JSON.parse(jsonPayload);
+                    if (data && (data.email || data.sub)) setUserEmail(data.email || data.sub);
+                }
+            } catch {
+                const storedEmail = localStorage.getItem('email');
+                if (storedEmail) setUserEmail(storedEmail);
+            }
         }
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowProfileMenu(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+    
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
@@ -135,8 +166,47 @@ const Dashboard = () => {
         <div className={`h-screen w-full font-sans overflow-hidden flex transition-colors duration-500 ${darkMode ? 'bg-[#0F0E0D] text-white' : 'bg-[#F5F5F3] text-black'}`}>
 
             {/* SIDEBAR */}
-            <aside className={`border-r transition-colors flex flex-col items-center py-8 w-20 ${darkMode ? 'bg-[#141210] border-white/5' : 'bg-white border-black/5'}`}>
-                <div className="w-10 h-10 bg-orange-500 rounded-full mb-12 flex items-center justify-center font-black text-black shadow-lg shadow-orange-500/20">G</div>
+            <aside className={`border-r transition-colors flex flex-col items-center py-8 w-20 relative z-[60] ${darkMode ? 'bg-[#141210] border-white/5' : 'bg-white border-black/5'}`}>
+
+                {/* PROFILE ICON WITH DROPDOWN */}
+                <div className="relative mb-12" ref={dropdownRef}>
+                    <button
+                        onClick={() => setShowProfileMenu(!showProfileMenu)}
+                        className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center font-black text-black shadow-lg shadow-orange-500/20 hover:scale-105 transition-transform active:scale-95"
+                    >
+                        {userEmail ? userEmail.charAt(0).toUpperCase() : 'G'}
+                    </button>
+
+                    {/* DROPDOWN MENU */}
+                    <AnimatePresence>
+                        {showProfileMenu && (
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className={`absolute left-14 top-0 w-48 rounded-2xl border shadow-2xl overflow-hidden backdrop-blur-xl ${darkMode ? 'bg-black/90 border-white/10' : 'bg-white/90 border-black/10'}`}
+                            >
+                                <div className={`p-4 border-b ${darkMode ? 'border-white/5' : 'border-black/5'}`}>
+                                    <p className={`text-[10px] font-black uppercase tracking-widest opacity-50 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Account</p>
+                                    <p className="text-xs font-bold truncate">{userEmail || 'ranjith@global.com'}</p>
+                                </div>
+
+                                <button
+                                    onClick={() => {
+                                        localStorage.removeItem("token");
+                                        toast.info("Logged out successfully");
+                                        window.location.href = "/login";
+                                    }}
+                                    className="w-full text-left p-4 text-[11px] font-black uppercase tracking-widest text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-between"
+                                >
+                                    Logout <span>→</span>
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+
+                {/* TOOL ICONS */}
                 <div className="flex-1 space-y-6 flex flex-col items-center">
                     <button onClick={() => setActiveTool('pencil')} className={`p-3 rounded-xl transition-all ${activeTool === 'pencil' ? 'bg-orange-500 text-black' : 'text-zinc-500 hover:text-white'}`}>✎</button>
                     <button onClick={() => setActiveTool('square')} className={`p-3 rounded-xl transition-all ${activeTool === 'square' ? 'bg-orange-500 text-black' : 'text-zinc-500 hover:text-white'}`}>▢</button>
@@ -147,7 +217,10 @@ const Dashboard = () => {
                         {isListening ? '●' : '🎤'}
                     </button>
                 </div>
-                <button onClick={() => setDarkMode(!darkMode)} className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${darkMode ? 'bg-zinc-800 border-white/10 text-yellow-400' : 'bg-zinc-100 border-black/10 text-indigo-600'}`}>{darkMode ? '☼' : '☾'}</button>
+
+                <button onClick={() => setDarkMode(!darkMode)} className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${darkMode ? 'bg-zinc-800 border-white/10 text-yellow-400' : 'bg-zinc-100 border-black/10 text-indigo-600'}`}>
+                    {darkMode ? '☼' : '☾'}
+                </button>
             </aside>
 
             {/* MAIN WORKSPACE */}

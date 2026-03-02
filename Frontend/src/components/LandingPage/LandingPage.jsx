@@ -1,4 +1,4 @@
-import {React , useEffect} from 'react';
+import { React, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import WhyUs from './WhyUs';
@@ -26,7 +26,7 @@ const LandingPage = () => {
     const HandleStart = () => {
         const token = localStorage.getItem("token");
         if (token) {
-            navigate("/dashboard"); 
+            navigate("/dashboard");
         }
         else {
             navigate("/signup");
@@ -55,13 +55,13 @@ const LandingPage = () => {
 
                 {/* Left Side: Editorial Content */}
                 <motion.div
-                    variants={containerFade} 
-                    initial="hidden" 
+                    variants={containerFade}
+                    initial="hidden"
                     animate="visible"
                     className="lg:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col justify-center bg-white"
                 >
                     <motion.span variants={itemSlide} className="font-sans text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400 mb-8">
-                        Established 2026 
+                        Established 2026
                     </motion.span>
 
                     <motion.h1 variants={itemSlide} className="text-5xl md:text-7xl lg:text-8xl font-normal leading-[0.9] mb-10 tracking-tighter">
@@ -75,8 +75,8 @@ const LandingPage = () => {
 
                     <motion.div variants={itemSlide}>
                         <button
-                        onClick={HandleStart}
-                        className="group relative border-2 border-black px-10 py-5 font-sans text-[10px] font-black uppercase tracking-[0.3em] overflow-hidden transition-all">
+                            onClick={HandleStart}
+                            className="group relative border-2 border-black px-10 py-5 font-sans text-[10px] font-black uppercase tracking-[0.3em] overflow-hidden transition-all">
                             <span className="relative z-10 group-hover:text-white transition-colors duration-500">Get Started</span>
                             <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
                         </button>
@@ -91,12 +91,12 @@ const LandingPage = () => {
                         <span className="absolute -right-4 -bottom-4 text-9xl font-black text-white/5 uppercase select-none pointer-events-none font-sans">01</span>
 
                         <motion.div initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }} className="relative z-10">
-                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-white/60 block">Phase I: The Protégé</span>
+                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Phase I: The Curious Peer</span>
                             <h2 className="text-3xl md:text-5xl italic font-light mb-6 transition-transform duration-500 group-hover:translate-x-2">
-                                "I don't quite see the connection yet..."
+                                "Wait, explain that part again... I'm not seeing the link."
                             </h2>
                             <p className="font-sans text-[11px] leading-loose max-w-sm opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-                                The AI adopts a state of confusion. You use the whiteboard to visualize logic, forcing your brain to synthesize information for a novice.
+                                The AI takes the role of a confused friend. You become the teacher, using the whiteboard to draw rough sketches and explain the core logic. By simplifying it for the AI, you actually master it yourself.
                             </p>
                         </motion.div>
                     </div>
@@ -106,20 +106,20 @@ const LandingPage = () => {
                         <span className="absolute -right-4 -bottom-4 text-9xl font-black text-white/5 uppercase select-none pointer-events-none font-sans">02</span>
 
                         <motion.div initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }} className="relative z-10">
-                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-white/60 block">Phase II: The Topper Friend</span>
+                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Phase II: The Topper Friend</span>
                             <h2 className="text-3xl md:text-5xl italic font-light mb-6 transition-transform duration-500 group-hover:translate-x-2">
-                                "Let's break this down into axioms."
+                                "Look, it's simple. Let's sketch out the axioms."
                             </h2>
                             <p className="font-sans text-[11px] leading-loose max-w-sm opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-                                Request clarity and the AI takes the pen. Complex concepts are dismantled into simple, visual diagrams that stick.
+                                When things get complex, the AI takes the pen. Like a "topper" friend's back-of-the-napkin doodle, it breaks down high-level concepts into intuitive, hand-drawn visual logic that just clicks.
                             </p>
                         </motion.div>
                     </div>
                 </div>
             </section>
-            <WhyUs/>
-            <FAQ/>
-            
+            <WhyUs />
+            <FAQ />
+
         </div>
     );
 };

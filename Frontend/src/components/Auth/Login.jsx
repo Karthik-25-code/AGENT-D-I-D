@@ -59,37 +59,67 @@ const Login = () => {
                 <span className="text-lg group-hover:-translate-x-1 transition-transform">←</span> Go Back
             </button>
 
-            {/* LEFT SIDE: Branding Panel */}
+            {/* LEFT SIDE: Branding Panel - AI Learning Partner Context */}
             <div className="w-full md:w-1/2 min-h-[50vh] md:h-screen bg-[#141210] relative flex items-end justify-center p-8 md:p-12 lg:p-24 pb-20 md:pb-32">
                 <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-orange-600/10 blur-[80px] md:blur-[120px] rounded-full"></div>
 
                 <div className="relative z-10 w-full max-w-lg">
+                    {/* Top Tagline */}
                     <div className="flex items-center gap-3 mb-6">
                         <div className="h-1 w-12 bg-orange-500"></div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500">Global Finance</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500">Active Synthesis</span>
                     </div>
 
+                    {/* Main Heading */}
                     <h1 className="text-5xl lg:text-7xl font-bold text-white leading-[0.9] tracking-tighter mb-8">
-                        Future <br /> Wealth<span className="text-orange-500">.</span>
+                        Learn by <br /> Teaching<span className="text-orange-500">.</span>
                     </h1>
 
-                    <p className="text-zinc-400 text-base md:text-lg font-light leading-relaxed mb-12 max-w-sm">
-                        Professional-grade asset management for the modern digital economy.
-                    </p>
+                    {/* Highlighted Points for your Context */}
+                    <div className="space-y-6 mb-12">
+                        <p className="text-zinc-400 text-base md:text-lg font-light leading-relaxed max-w-sm">
+                            A shared digital whiteboard where your AI partner evolves with you.
+                        </p>
 
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3">
+                                <span className="text-orange-500 font-black mt-1">01</span>
+                                <span className="text-zinc-300 text-sm font-medium uppercase tracking-wider">
+                                    AI acts confused so <span className="text-white">you can teach it</span> (Feynman Technique).
+                                </span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-orange-500 font-black mt-1">02</span>
+                                <span className="text-zinc-300 text-sm font-medium uppercase tracking-wider">
+                                    Got a doubt? AI oka <span className="text-white italic">topper friend</span> la simple
+                                    <span className="text-white"> rough sketches </span> thoo explain chasthadhi.
+                                </span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-orange-500 font-black mt-1">03</span>
+                                <span className="text-zinc-300 text-sm font-medium uppercase tracking-wider">
+                                    Two-way partnership: Draw, discuss, and master concepts together.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Visual Terminal / Whiteboard Preview */}
                     <div className="relative group max-w-xs hidden md:block">
                         <div className="absolute inset-0 bg-orange-500 translate-x-3 translate-y-3 -z-10 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                        <img
-                            src="https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?auto=format&fit=crop&q=80&w=800"
-                            alt="Terminal"
-                            className="w-full h-48 object-cover border border-white/10"
-                        />
+                        <div className="w-full h-48 bg-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
+                                alt="Collaborative Learning"
+                                className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all"
+                            />
+                        </div>
                     </div>
                 </div>
 
                 <div className="absolute bottom-6 md:bottom-10 left-8 md:left-12 right-8 md:right-12 flex justify-between items-center text-[8px] md:text-[9px] text-zinc-600 tracking-[0.2em] font-bold uppercase">
-                    <span>Encrypted Session</span>
-                    <span>© 2026 Payoneer</span>
+                    <span>Feynman Protocol Active</span>
+                    <span>© 2026 Agent DID</span>
                 </div>
             </div>
 
