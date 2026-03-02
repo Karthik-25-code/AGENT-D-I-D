@@ -1,5 +1,7 @@
 /.history
 /Backend/.env
+/Backend/_pycache__/
+/Backend/utils/__pycache__/
 /Backend/node_modules/
 /Frontend/node_modules/
 /Frontend/dist/
