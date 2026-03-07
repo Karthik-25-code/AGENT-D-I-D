@@ -1,0 +1,31 @@
+# --- LLM Framework ---
+langchain
+langgraph
+
+# --- Google Gemini ---
+langchain-google-genai
+google-generativeai
+
+# --- Memory (mem0) ---
+mem0ai
+
+# --- Environment & Config ---
+python-dotenv
+
+# --- Async + API (recommended for agents) ---
+fastapi
+uvicorn
+
+# --- Utilities ---
+pydantic
+requests
+tqdm
+
+# --- Tokenization / text utils (needed indirectly) ---
+tiktoken
+
+
+boto3
+faiss-cpu 
+sentence-transformers
+groq

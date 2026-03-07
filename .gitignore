@@ -1,0 +1,103 @@
+# ==============================
+# Python compiled files
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+agent/
+# ==============================
+# Virtual environments
+# ==============================
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+pythonenv/
+env.bak/
+venv.bak/
+
+# ==============================
+# Environment variables
+# ==============================
+.env
+.env.*
+*.env
+
+# ==============================
+# Distribution / packaging
+# ==============================
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# Testing / coverage
+# ==============================
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# Type checker
+# ==============================
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# ==============================
+# IDE files
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
+
+# ==============================
+# OS files
+# ==============================
+Thumbs.db
+.DS_Store
+
+# ==============================
+# Temporary files
+# ==============================
+*.tmp
+*.temp
+*.bak
+*.sqlite3
+
+# ==============================
+# Docker
+# ==============================
+docker-compose.override.yml
+
+# ==============================
+# Misc
+# ==============================
+*.pid
+*.seed
