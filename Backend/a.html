@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Coding Whiteboard</title>
+    <script src="https://unpkg.com/roughjs@latest/bundled/rough.js"></script>
+    <style>
+        body { font-family: 'Comic Sans MS', cursive; background: #2c3e50; color: white; text-align: center; }
+        .canvas-container { background: white; padding: 20px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .explanation { max-width: 600px; margin: 20px auto; font-size: 1.1em; color: #ecf0f1; min-height: 80px; }
+    </style>
+</head>
+<body>
+
+    <h1>Whiteboard Session: Python For Loops</h1>
+    <div id="speech" class="explanation">Initializing teacher explanation...</div>
+
+    <div class="canvas-container">
+        <canvas id="whiteboard" width="800" height="400"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('whiteboard');
+        const rc = rough.canvas(canvas);
+        const ctx = canvas.getContext('2d');
+        const speechDiv = document.getElementById('speech');
+
+        // FIXED JSON: Cleaned duplicates and ensured valid array structure
+        const aiSteps = [
+{
+      "step": 1,
+      "type": "rectangle",
+      "args": [
+        100,
+        100,
+        200,
+        50
+      ],
+      "options": {
+        "stroke": "black",
+        "strokeWidth": 2,
+        "fill": "rgba(0,0,0,0.05)",
+        "fillStyle": "hachure"
+      },
+      "text": "Machine Basics",
+      "speech_reference": "A machine is a tool that can perform tasks automatically."
+    },
+    {
+      "step": 2,
+      "type": "circle",
+      "args": [
+        300,
+        100,
+        50
+      ],
+      "options": {
+        "stroke": "black",
+        "strokeWidth": 2,
+        "fill": "rgba(0,0,0,0.05)",
+        "fillStyle": "hachure"
+      },
+      "text": "Computer Type",
+      "speech_reference": "A computer is a type of machine that can process information."
+    },
+    {
+      "step": 3,
+      "type": "line",
+      "args": [
+        100,
+        200,
+        300,
+        200
+      ],
+      "options": {
+        "stroke": "black",
+        "strokeWidth": 2
+      },
+      "text": "Relationship",
+      "speech_reference": "A machine can be a computer, but not all machines are computers."
+    }
+]
+
+        function drawStep(index) {
+            if (index >= aiSteps.length) return;
+
+            const item = aiSteps[index];
+            speechDiv.innerText = `Teacher: "${item.speech_reference}"`;
+
+            // 1. Handle Rough.js Geometry
+            if (item.type === "rectangle") {
+                rc.rectangle(...item.args, item.options);
+            } else if (item.type === "circle") {
+                // Rough.js circle uses center x, y, and DIAMETER (radius * 2)
+                rc.circle(item.args[0], item.args[1], item.args[2] * 2, item.options);
+            } else if (item.type === "line") {
+                rc.line(...item.args, item.options);
+            }
+
+            // 2. Handle Text Labeling via standard Canvas API
+            ctx.font = "bold 18px 'Comic Sans MS'";
+            ctx.fillStyle = "#2c3e50";
+            
+            if (item.text) {
+                // If it's a 'text_only' type, use args for position, otherwise offset from shape
+                const tx = item.type === "text_only" ? item.args[0] : item.args[0] + 5;
+                const ty = item.type === "text_only" ? item.args[1] : item.args[1] - 15;
+                ctx.fillText(item.text, tx, ty);
+            }
+
+            // Delay for the "live drawing" effect
+            setTimeout(() => drawStep(index + 1), 2000);
+        }
+
+        drawStep(0);
+    </script>
+</body>
+</html>

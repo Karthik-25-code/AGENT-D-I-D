@@ -4,7 +4,8 @@ import LandingPage from './components/LandingPage/LandingPage';
 import Navbar from './components/Navbar';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Board/Dashboard';
+import { ToastProvider } from './components/Toast/ToastProvider'; // Import the provider
 
 // We create a "Content" component so we can use useLocation() inside it
 const AppContent = () => {
@@ -13,7 +14,6 @@ const AppContent = () => {
 
   return (
     <div className="min-h-screen bg-[#F9F7F2]">
-      {/* Now useLocation works because it's inside the Router tag in the parent */}
       {isDash && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -27,9 +27,11 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ToastProvider> {/* 1. Wrap everything here */}
+      <Router>
+        <AppContent />
+      </Router>
+    </ToastProvider>
   );
 };
 
