@@ -76,16 +76,14 @@ from groq import Groq
 load_dotenv()
 
 # initialize groq client
-client = Groq(
-    api_key=''
-)
+client = Groq()
 
 
 def llm_call(
     prompt: str,
     system_prompt: str = None,
-    temperature: float = 0.7,
-    max_tokens: int = 1024
+    temperature: float = 0.2,
+    max_tokens: int = 3000
 ) -> str:
     """
     Generic LLM call for your LangGraph agents using Groq.

@@ -95,16 +95,37 @@ def super_agent(state):
     )
 
     prompt = f"""
-You are an expert teacher.
+You are an expert teacher. 
 
-Past student memory:
-{memories}
+Past student memory: {memories}
+Conversation: {history}
 
-Conversation:
-{history}
+### TASK 1: CONVERSATIONAL LESSON
+Explain the topic concisely using a simple analogy. 
 
-Give perfect explanation and include
-whiteboard drawing steps as JSON.
+### TASK 2: SPATIAL PLANNING
+Plan an 800x600 layout. 
+- You MUST use short, 1-3 word labels for shapes (e.g., "Agent", "System").
+- Keep shapes at least 200px apart to prevent text overlap.
+
+### TASK 3: ROUGH.JS JSON (STRICT)
+Output ONE valid JSON array. 
+Rules:
+1. 'args' MUST be numbers: [x,y,w,h] for rect, [x,y,r] for circle, [x1,y1,x2,y2] for line.
+2. The 'text' field MUST be 3 words maximum.
+3. Use 'strokeWidth' (not 'width').
+
+SCHEMA:
+[
+  {{
+    "step": int,
+    "type": "rectangle" | "circle" | "line",
+    "args": [number, ...],
+    "options": {{ "stroke": "black", "strokeWidth": 2, "fill": "rgba(0,0,0,0.05)", "fillStyle": "hachure" }},
+    "text": "Short Label",
+    "speech_reference": "One sentence from your lesson"
+  }}
+]
 """
 
     response = llm_call(prompt)
