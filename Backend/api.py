@@ -18,8 +18,8 @@ origins = [
 # 2. Add the middleware to your app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,            # Allow specific origins
-    allow_credentials=True,
+    allow_origins=["*"],            # Allow specific origins
+    allow_credentials=False,
     allow_methods=["*"],              # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],              # Allow all headers
 )
@@ -115,4 +115,4 @@ async def encode_text(text: str):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("api:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)

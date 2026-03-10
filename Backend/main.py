@@ -98,38 +98,45 @@ def super_agent(state):
     )
 
     prompt = f"""
-You are an expert teacher. 
+You are an expert Educational Visual Architect. 
 
 Past student memory: {memories}
 Conversation: {history}
+Topic: {state['topic']}
 
-### TASK 1: CONVERSATIONAL LESSON
-Explain the topic concisely using a simple analogy. 
+Your task is to design a massive, highly detailed 800x600 Rough.js diagram that thoroughly explains the topic. 
+You must output ONLY a single, completely valid JSON array containing 50+ elements. NO markdown formatting outside the JSON, NO introductory text. The output MUST start with `[` and end with `]`.
 
-### TASK 2: SPATIAL PLANNING
-Plan an 800x600 layout. 
-- You MUST use short, 1-3 word labels for shapes (e.g., "Agent", "System").
-- Keep shapes at least 200px apart to prevent text overlap.
+### 1. UNRESTRICTED ROUGH.JS ARSENAL (CRITICAL)
+- You have total freedom to use ANY valid geometric shape or path from the Rough.js library (e.g., `rectangle`, `circle`, `ellipse`, `line`, `polygon`, `arc`, `curve`, `path`, `linearPath`).
+- Choose the shape dynamically based on what best represents the semantic meaning of the concept.
+- **WARNING:** Do NOT invent fictional shape types (e.g., do NOT use a "text" type). Text rendering is handled externally. You must only output valid Rough.js geometric primitives.
 
-### TASK 3: ROUGH.JS JSON (STRICT)
-Output ONE valid JSON array. 
-Rules:
-1. 'args' MUST be numbers: [x,y,w,h] for rect, [x,y,r] for circle, [x1,y1,x2,y2] for line.
-2. The 'text' field MUST be 3 words maximum.
-3. Use 'strokeWidth' (not 'width').
+### 2. MASSIVE SCALE & SPATIAL LOGIC
+- Generate a highly detailed diagram containing 50+ distinct elements to map out micro-interactions, edge cases, and broad architecture.
+- Canvas Size: 1000 (width) x 800 (height).
+- You MUST space out coordinates mathematically to prevent stroke and text overlap. Keep at least 80-100px of space between the starting points of shapes. 
+- Group related sub-topics into distinct clusters across the canvas.
 
-SCHEMA:
+### 3. EDUCATIONAL CONTENT
+- Quality over Quantity: Every single `speech_reference` must teach a UNIQUE, specific fact about the topic. Do not repeat generic phrases. If the user asks about Python index values, detail positive indexing, negative indexing, `IndexError`, slicing syntax, etc.
+- The `text` field must be 1-3 words maximum. This acts as the visual label for the shape.
+
+### 4. STYLING & JSON FORMAT
+- Vary the styling professionally to distinguish different concepts. Use specific hex codes and Rough.js `fillStyle` options (e.g., `hachure`, `solid`, `zigzag`, `cross-hatch`).
+- Ensure the JSON is perfectly formatted and does not get cut off.
+
+### STRICT JSON SCHEMA
+```json
 [
   {{
-    "step": int,
-    "type": "rectangle" | "circle" | "line",
-    "args": [number, ...],
-    "options": {{ "stroke": "black", "strokeWidth": 2, "fill": "rgba(0,0,0,0.05)", "fillStyle": "hachure" }},
+    "type": "<ANY_VALID_ROUGH_JS_SHAPE>",
+    "args": [<APPROPRIATE_ARGS_FOR_SHAPE>],
+    "options": {{ "stroke": "#2c3e50", "strokeWidth": 2, "fill": "rgba(41, 128, 185, 0.2)", "fillStyle": "solid" }},
     "text": "Short Label",
-    "speech_reference": "One sentence from your lesson"
+    "speech_reference": "One highly specific, unique sentence explaining this exact part of the topic."
   }}
-]
-"""
+]"""
 
     response = llm_call(prompt)
 

@@ -25,21 +25,44 @@ const Signup = () => {
         } else {
             setError("");
         }
-        const response = await fetch("http://127.0.0.1:8000/auth/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ fullName, email, password}),
-        });
+        let response;
+        try {
+            response = await fetch("/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ fullName, email, password}),
+            });
+        } catch (networkErr) {
+            console.error('Network error during signup:', networkErr);
+            toast.error('Network error: could not reach server');
+            setError('Network error: could not reach server');
+            return;
+        }
 
-        const data = await response.json();
+        let data = {};
+        try {
+            // Only attempt to parse JSON if server returned JSON
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+                data = await response.json();
+            }
+        } catch (err) {
+            // Ignore JSON parse errors and keep data as {}
+            data = {};
+            console.log(err);
+        }
 
         if (response.ok) {
-            localStorage.setItem("token", data.access_token);
+            // If backend returns message-only, token may be missing; guard access
+            if (data && data.access_token) {
+                localStorage.setItem("token", data.access_token);
+            }
             toast.success('Account created — redirecting to dashboard');
             setTimeout(() => { window.location.href = '/dashboard'; }, 900);
         } else {
-            toast.error('Signup failed: ' + (data.detail || 'Please try again'));
-            setError(data.detail || 'Signup failed.');
+            const detail = (data && (data.detail || data.message)) || 'Please try again';
+            toast.error('Signup failed: ' + detail);
+            setError(detail);
         }
     };
 

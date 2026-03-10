@@ -6,6 +6,7 @@ import FAQ from './FAQ';
 
 const m = motion;
 console.log(m);
+
 const LandingPage = () => {
     // Animation Variants
     const { hash } = useLocation();
@@ -60,17 +61,14 @@ const LandingPage = () => {
                     animate="visible"
                     className="lg:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col justify-center bg-white"
                 >
-                    <motion.span variants={itemSlide} className="font-sans text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400 mb-8">
-                        Established 2026
-                    </motion.span>
 
                     <motion.h1 variants={itemSlide} className="text-5xl md:text-7xl lg:text-8xl font-normal leading-[0.9] mb-10 tracking-tighter">
-                        Mastery <br />
-                        <span className="italic text-zinc-400 text-4xl md:text-6xl lg:text-7xl block mt-2">through teaching.</span>
+                        Agent-DID <br />
+                        <span className="italic text-zinc-400 text-4xl md:text-6xl lg:text-7xl block mt-2">Your study buddy.</span>
                     </motion.h1>
 
                     <motion.p variants={itemSlide} className="font-sans text-base md:text-lg text-zinc-500 max-w-md leading-relaxed mb-12">
-                        A collaborative digital ecosystem where you and an AI peer trade the role of teacher. Bridge the gap between knowing and understanding.
+                        An AI-powered learning system that flips roles. Jump into a shared living whiteboard where you and AI can draw diagrams, write steps, and solve problems together—just like a video call with a friend.
                     </motion.p>
 
                     <motion.div variants={itemSlide}>
@@ -91,12 +89,12 @@ const LandingPage = () => {
                         <span className="absolute -right-4 -bottom-4 text-9xl font-black text-white/5 uppercase select-none pointer-events-none font-sans">01</span>
 
                         <motion.div initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }} className="relative z-10">
-                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Phase I: The Curious Peer</span>
+                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Jarvis: Questioning AI</span>
                             <h2 className="text-3xl md:text-5xl italic font-light mb-6 transition-transform duration-500 group-hover:translate-x-2">
-                                "Wait, explain that part again... I'm not seeing the link."
+                                "Can you explain that? Let's check the reasoning."
                             </h2>
                             <p className="font-sans text-[11px] leading-loose max-w-sm opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-                                The AI takes the role of a confused friend. You become the teacher, using the whiteboard to draw rough sketches and explain the core logic. By simplifying it for the AI, you actually master it yourself.
+                                Acting as your "Confused Classmate," Jarvis listens to your explanation and asks questions. It detects missing or incorrect reasoning and guides you to fix it, helping you overcome the illusion of knowing.
                             </p>
                         </motion.div>
                     </div>
@@ -106,12 +104,12 @@ const LandingPage = () => {
                         <span className="absolute -right-4 -bottom-4 text-9xl font-black text-white/5 uppercase select-none pointer-events-none font-sans">02</span>
 
                         <motion.div initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }} className="relative z-10">
-                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Phase II: The Topper Friend</span>
+                            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] mb-4 text-orange-500 block">Ultron: Teaching AI</span>
                             <h2 className="text-3xl md:text-5xl italic font-light mb-6 transition-transform duration-500 group-hover:translate-x-2">
-                                "Look, it's simple. Let's sketch out the axioms."
+                                "Stuck? Let's sketch out the steps on the board."
                             </h2>
                             <p className="font-sans text-[11px] leading-loose max-w-sm opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-                                When things get complex, the AI takes the pen. Like a "topper" friend's back-of-the-napkin doodle, it breaks down high-level concepts into intuitive, hand-drawn visual logic that just clicks.
+                                When learning stalls and you hit dead ends, Ultron acts as a "Topper Friend." It explains concepts step-by-step using interactive free-hand visual explanations that feel just like a friend sketching ideas.
                             </p>
                         </motion.div>
                     </div>
