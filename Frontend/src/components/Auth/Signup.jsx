@@ -28,7 +28,7 @@ const Signup = () => {
         }
         let response;
         try {
-            response = await fetch(`http://0.0.0.0:8000/auth/signup`, {
+            response = await fetch(`/api/auth/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullName, email, password}),
