@@ -16,6 +16,7 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        const API_BASE = import.meta.env.VITE_API_URL || "http://13.201.48.229:8000";
         const { fullName, email, password, confirmPassword } = formData;
 
         if (!fullName || !email || !password || !confirmPassword) {
@@ -27,7 +28,7 @@ const Signup = () => {
         }
         let response;
         try {
-            response = await fetch("/api/auth/signup", {
+            response = await fetch(`http://0.0.0.0:8000/auth/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullName, email, password}),

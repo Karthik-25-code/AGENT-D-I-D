@@ -10,10 +10,6 @@ from memory import save_learning, retrieve_learning
 
 app = FastAPI()
 
-# 1. Define the origins that are allowed to talk to your server
-origins = [
-    "http://localhost:5173",
-]
 
 # 2. Add the middleware to your app
 app.add_middleware(
